@@ -173,12 +173,12 @@ def save_batch_image_with_mesh_joints(mesh_renderer, batch_images, cam_params, b
                           dtype=np.uint8)
 
     for id_image in range(num_images):
-        image = batch_images[id_image].numpy()
-        cam_param = cam_params[id_image].numpy()
-        box = bboxes[id_image].numpy()
-        mesh_xyz = est_mesh_cam_xyz[id_image].numpy()
-        pose_uv = est_pose_uv[id_image].numpy()
-        pose_xyz = est_pose_cam_xyz[id_image].numpy()
+        image = batch_images[id_image].cpu().numpy()
+        cam_param = cam_params[id_image].cpu().numpy()
+        box = bboxes[id_image].cpu().numpy()
+        mesh_xyz = est_mesh_cam_xyz[id_image].cpu().numpy()
+        pose_uv = est_pose_uv[id_image].cpu().numpy()
+        pose_xyz = est_pose_cam_xyz[id_image].cpu().numpy()
 
         rend_img_overlay, rend_img_vp1, rend_img_vp2 = draw_mesh(mesh_renderer, image, cam_param, box, mesh_xyz)
         skeleton_overlay = draw_2d_skeleton(image, pose_uv)

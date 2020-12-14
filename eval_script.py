@@ -67,7 +67,7 @@ def main():
     # 3. Inference
     model.eval()
     results_pose_cam_xyz = {}
-    cpu_device = torch.device("cpu")
+    cpu_device = torch.device("cuda:0")
     logger.info("Evaluate on {} frames:".format(len(dataset_val)))
     for i, batch in enumerate(data_loader_val):
         images, cam_params, bboxes, pose_roots, pose_scales, image_ids = batch

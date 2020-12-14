@@ -56,7 +56,7 @@ class RealWorldTestSet(torch.utils.data.Dataset):
     def evaluate_pose(self, results_pose_cam_xyz, save_results=False, output_dir=""):
         avg_est_error = 0.0
         for image_id, est_pose_cam_xyz in results_pose_cam_xyz.items():
-            dist = est_pose_cam_xyz - self.pose_gts[image_id]  # K x 3
+            dist = est_pose_cam_xyz.cuda() - self.pose_gts[image_id].cuda() # K x 3
             avg_est_error += dist.pow(2).sum(-1).sqrt().mean()
 
         avg_est_error /= len(results_pose_cam_xyz)
@@ -64,12 +64,12 @@ class RealWorldTestSet(torch.utils.data.Dataset):
         if save_results:
             eval_results = {}
             image_ids = results_pose_cam_xyz.keys()
-            image_ids.sort()
+            image_ids = list(sorted(image_ids))
             eval_results["image_ids"] = np.array(image_ids)
             eval_results["gt_pose_xyz"] = [self.pose_gts[image_id].unsqueeze(0) for image_id in image_ids]
             eval_results["est_pose_xyz"] = [results_pose_cam_xyz[image_id].unsqueeze(0) for image_id in image_ids]
-            eval_results["gt_pose_xyz"] = torch.cat(eval_results["gt_pose_xyz"], 0).numpy()
-            eval_results["est_pose_xyz"] = torch.cat(eval_results["est_pose_xyz"], 0).numpy()
+            eval_results["gt_pose_xyz"] = torch.cat(eval_results["gt_pose_xyz"], 0).cpu().numpy()
+            eval_results["est_pose_xyz"] = torch.cat(eval_results["est_pose_xyz"], 0).cpu().numpy()
             sio.savemat(osp.join(output_dir, "pose_estimations.mat"), eval_results)
 
         return avg_est_error.item()
