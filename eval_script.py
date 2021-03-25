@@ -77,7 +77,8 @@ def main():
             est_mesh_cam_xyz, est_pose_uv, est_pose_cam_xyz = \
                 model(images, cam_params, bboxes, pose_roots, pose_scales)
 
-            est_mesh_cam_xyz = [o.to(cpu_device) for o in est_mesh_cam_xyz]
+#             est_mesh_cam_xyz = [o.to(cpu_device) for o in est_mesh_cam_xyz]
+            est_mesh_cam_xyz = None
             est_pose_uv = [o.to(cpu_device) for o in est_pose_uv]
             est_pose_cam_xyz = [o.to(cpu_device) for o in est_pose_cam_xyz]
 
