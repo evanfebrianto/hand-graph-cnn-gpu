@@ -9,9 +9,9 @@ from __future__ import print_function
 import numpy as np
 import cv2
 
-from opendr.camera import ProjectPoints
-from opendr.renderer import ColoredRenderer
-from opendr.lighting import LambertianPointLight
+# from opendr.camera import ProjectPoints
+# from opendr.renderer import ColoredRenderer
+# from opendr.lighting import LambertianPointLight
 
 colors = {
     # colorbline/print/copy safe:
