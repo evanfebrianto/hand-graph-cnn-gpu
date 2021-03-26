@@ -43,7 +43,7 @@ class Hand_Graph_CNN():
 
         # 3. Inference
         self.model.eval()
-        self.cam_param = torch.Tensor([[923.6480, 923.7590, 640.0470, 362.3360]]).to(self.device)
+        self.cam_param = torch.Tensor([[2210.0759, 2437.6676, 664.2237, 383.9007]]).to(self.device)
         self.bbox = torch.Tensor([[320., 240., 100., 100.]]).to(self.device)
         self.pose_root = torch.Tensor([[0, 0, 0]]).to(self.device)
         self.pose_scale = torch.Tensor([5.]).to(self.device)
