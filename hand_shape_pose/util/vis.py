@@ -32,7 +32,7 @@ def fig2data(fig):
 
     # Get the RGBA buffer from the figure
     w, h = fig.canvas.get_width_height()
-    buf = np.fromstring(fig.canvas.tostring_argb(), dtype=np.uint8)
+    buf = np.frombuffer(fig.canvas.tostring_argb(), dtype=np.uint8)
     buf.shape = (w, h, 4)
 
     # canvas.tostring_argb give pixmap in ARGB mode. Roll the ALPHA channel to have it in RGBA mode
@@ -121,7 +121,7 @@ def draw_3d_skeleton_on_ax(pose_cam_xyz, ax):
             continue
         elif joint_ind % 4 == 1:
             ax.plot(pose_cam_xyz[[0, joint_ind], 0], pose_cam_xyz[[0, joint_ind], 1], pose_cam_xyz[[0, joint_ind], 2],
-                    color=color_hand_joints[joint_ind], lineWidth=line_wd)
+                    color=color_hand_joints[joint_ind], linewidth=line_wd)
         else:
             ax.plot(pose_cam_xyz[[joint_ind - 1, joint_ind], 0], pose_cam_xyz[[joint_ind - 1, joint_ind], 1],
                     pose_cam_xyz[[joint_ind - 1, joint_ind], 2], color=color_hand_joints[joint_ind],
